@@ -1,0 +1,40 @@
+<div class="card center">
+  <form [formGroup]="form">
+    <div class="col-12">
+      <div class="p-fluid p-formgrid grid">
+          <div class="field col-12 md:col-12 mb-2">
+              <div class="p-float-label">
+                  <input id="float-input" type="text" pInputText formControlName="country"/>
+                  <label for="float-input" htmlFor="country">Country</label>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+        <div class="p-fluid p-formgrid grid">
+            <div class="field col-12 md:col-12 mb-2">
+                <div class="p-float-label">
+                    <input type="text" id="float-input" pInputText formControlName="city"/>
+                    <label for="float-input">City</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center">
+        <button pButton pRipple type="button" label="Get Weather" class="custom-button p-button-sm" (click)="displayWeather()"></button>
+    </div>
+  </form>
+</div>
+
+<div class="row" *ngIf="weather">
+  <div class="column" *ngFor="let w of weather.list">
+    <p-card [header]="w.main.temp" [subheader]="getDate(w.dt_txt)" [style]="{width: '400px'}" c styleClass="p-card-shadow">
+      <span><b>Feels Like:</b> {{w.main.temp}} | <b>Humidity:</b> {{w.main.humidity}}</span>
+      <ng-template pTemplate="footer" *ngFor="let a of w.weather">
+        <span class="custom-font">{{a.description}}</span> 
+      </ng-template>
+    </p-card>
+  </div>
+</div>
